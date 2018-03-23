@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">MapGoogle</string>
     <string name="title_activity_maps">Map</string>
+
+
+    <string name="btn_start">Начальные координаты</string>
+    <string name="btn_finish">Конечные координаты</string>
+    <string name="btn_save">Сохранить координаты</string>
+    <string name="btn_map">Посмотреть карту</string>
+
+    <string name="hint_lati">latitude</string>
+    <string name="hint_longi">longitude</string>
 </resources>

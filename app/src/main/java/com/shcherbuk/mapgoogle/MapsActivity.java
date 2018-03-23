@@ -1,23 +1,14 @@
 package com.shcherbuk.mapgoogle;
 
-import android.Manifest;
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.location.Location;
-import android.location.LocationManager;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v4.app.FragmentActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,16 +16,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.shcherbuk.mapgoogle.pojo.Coordinates;
-import com.shcherbuk.mapgoogle.pojo.CoordinatesList;
 
-import java.util.ArrayList;
-import java.util.List;
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, Constants {
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,Constants {
-    static final int REQUEST_LOCATION = 1;
-/*    double lati;
-    double longi;*/
-    List<Coordinates> list=new ArrayList<>();
     private GoogleMap mMap;
 
     @Override
@@ -56,33 +40,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-    private void readDB(){
-        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+    private void readDB() {
+        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference().child("coordinates");
         ValueEventListener postListener = new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    Coordinates coordinates = ds.getValue(Coordinates.class);
+                    if (coordinates != null) {
+                        PolylineOptions line =
+                                new PolylineOptions().add(new LatLng(coordinates.getStart_lati(), coordinates.getStart_longi()),
+                                        new LatLng(coordinates.getFinish_lati(), coordinates.getFinish_longi()))
+                                        .width(5).color(Color.RED);
 
-                CoordinatesList coordinatesList=dataSnapshot.getValue(CoordinatesList.class);
-                if (coordinatesList!=null){
-                    Log.i("coordinatesList", String.valueOf(coordinatesList));
-                    List<Coordinates> coordinates=coordinatesList.getList();
-                    Log.i("coordinates", String.valueOf(coordinates.size()));
-                    if(coordinates!=null){
-                        Log.i("coordinatesList","2");
-                        for(Coordinates coordinate: coordinatesList.getList()){
-                            Log.i("coordinatesList",coordinate.toString());
-                            PolylineOptions line=
-                                    new PolylineOptions().add(new LatLng(coordinate.getStart_lati(),coordinate.getStart_longi()),
-                                            new LatLng(coordinate.getFinish_lati(),coordinate.getFinish_longi()))
-                                            .width(5).color(Color.RED);
-
-                            mMap.addPolyline(line);
-                        }
+                        mMap.addPolyline(line);
                     }
 
                 }
-
             }
 
             @Override
@@ -93,6 +68,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         rootRef.addListenerForSingleValueEvent(postListener);
 
 /*        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));*/
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53,53),15));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(53.7788, 27.5948), 7));
     }
 }

@@ -8,7 +8,7 @@ public class Coordinates {
     private double finish_lati;
     private double finish_longi;
 
-    public Coordinates(){
+    public Coordinates() {
 
     }
 
