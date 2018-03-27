@@ -10,4 +10,6 @@
 
     <string name="hint_lati">latitude</string>
     <string name="hint_longi">longitude</string>
+
+    <string name="internet">Проверьте интернет соединение</string>
 </resources>

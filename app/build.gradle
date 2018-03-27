@@ -26,6 +26,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:11.8.0'
     implementation 'com.google.firebase:firebase-auth:11.8.0'
     implementation 'com.google.firebase:firebase-database:11.8.0'
+
+    compile 'com.arello-mobile:moxy:1.5.3'
+    compile 'com.arello-mobile:moxy-app-compat:1.5.3'
+    annotationProcessor 'com.arello-mobile:moxy-compiler:1.5.3'
     compile 'io.ticofab.androidgpxparser:parser:1.1.1'
 
     testImplementation 'junit:junit:4.12'
