@@ -8,15 +8,18 @@ public class Coordinates {
     private double finish_lati;
     private double finish_longi;
 
+    private String color;
+
     public Coordinates() {
 
     }
 
-    public Coordinates(double start_lati, double start_longi, double finish_lati, double finish_longi) {
+    public Coordinates(double start_lati, double start_longi, double finish_lati, double finish_longi, String color) {
         this.start_lati = start_lati;
         this.start_longi = start_longi;
         this.finish_lati = finish_lati;
         this.finish_longi = finish_longi;
+        this.color = color;
     }
 
     public double getStart_lati() {
@@ -49,5 +52,13 @@ public class Coordinates {
 
     public void setFinish_longi(double finish_longi) {
         this.finish_longi = finish_longi;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 }

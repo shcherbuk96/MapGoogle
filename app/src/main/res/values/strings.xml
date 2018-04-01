@@ -12,4 +12,11 @@
     <string name="hint_longi">longitude</string>
 
     <string name="internet">Проверьте интернет соединение</string>
+
+    <string-array name="color_list">
+        <item>Красный</item>
+        <item>Зелёный</item>
+        <item>Чёрный</item>
+        <item>Синий</item>
+    </string-array>
 </resources>

@@ -1,16 +1,20 @@
 package com.shcherbuk.mapgoogle.gps;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.widget.Toast;
 
 import static android.content.Context.LOCATION_SERVICE;
+import static android.content.Context.POWER_SERVICE;
 
 
 public class GpsTracker implements LocationListener {
@@ -25,6 +29,7 @@ public class GpsTracker implements LocationListener {
     public Location getLocation(){
         if (ContextCompat.checkSelfPermission( context, android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED) {
             Toast.makeText(context, "Permission not granted / Разрешение не получено", Toast.LENGTH_SHORT).show();
+
             return null;
         }
         try {
